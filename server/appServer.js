@@ -1,12 +1,13 @@
-//this is the route
+
 const express = require('express')
-const bodyParser = require("body-parser");
+var bodyParser = require("body-parser");
 const app = express();
 
 app.use(express.static('client/public'));
 app.use(bodyParser.json({type: 'application/json'}));
 
-let feedcontroller = require('./controller/feedController');
+let feedController = require('./controller/feedController');
+let catController = require('./controller/catController');
 
 /*app.route('api/feedItems')
     .get((req,res ) =>{
@@ -16,14 +17,28 @@ let feedcontroller = require('./controller/feedController');
         feedController.getfeedItems(req, res);
 })
 */
-app.route('/api/users')
-	.get(feedcontroller.getfeedItems)
-	.post(feedcontroller.saveFeedItem)
+//this is the route
+app.route('/api/feedItems')
+	.get(feedController.getFeedItems)
+	.post(feedController.saveFeedItem)
+
 
 app.route('/api/feedItems/:feedItemId')
-	.get(feedcontroller.getfeedItems)
-	.delete(feedcontroller.deletefeedItem)
-	.patch(feedcontroller.updatefeedItem)
+	.get(feedController.getFeedItem)
+    .delete(feedController.deleteFeedItem)
+    .patch(feedController.updateFeedItem) 
+    .put(feedController.updateFeedItem)
+
+app.route('/api/cats')
+	.get(catController.getCats)
+	.post(catController.savecat)
+
+
+app.route('/api/cats/:catId')
+	.get(catController.getCat)
+    .delete(catController.deletecat)
+    .patch(catController.updatecat) 
+    .put(catController.updatecat)
 
 app.get('/', function(req, res) {
     res.sendFile('index.html', {root: './client/views'})

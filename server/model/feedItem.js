@@ -7,7 +7,7 @@
 function feedItem(Title, Body, LinkUrl, imageUrl){
     this.Title = Title;
     this.Body = Body;
-    this.linkUrl = linkUrl; 
+    this.linkUrl = LinkUrl; 
     this.imageUrl = imageUrl;
 }
 
@@ -19,8 +19,9 @@ console.log ('model running!')
 */
 
 //DATA BASE COMPONENT
-exports.getAllFeedItems = function() {
-    return(allFeedItems);
+exports.createFeedItems = function(Title, Body, LinkUrl, imageUrl) {
+    return new feedItem(Title, Body, LinkUrl, imageUrl);
+    //return(allFeedItems);
 }
 console.log ('model running!')
 
